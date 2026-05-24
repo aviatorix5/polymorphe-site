@@ -13,9 +13,11 @@
 </head>
 <body>
 
-  <!-- HERO — full bleed image with calligraphic wordmark -->
+  <!-- HERO — full bleed video with calligraphic wordmark -->
   <section class="ro-hero">
-    <img class="ro-hero-media" src="medias/hero.jpg" alt="" loading="eager">
+    <video class="ro-hero-media" autoplay muted loop playsinline preload="auto">
+      <source src="medias/intro-loop.mp4" type="video/mp4">
+    </video>
     <div class="ro-hero-wordmark">
       <img src="medias/wordmark-polymorphe.png" alt="Polymorphe">
     </div>
@@ -42,6 +44,7 @@
       <span class="sep">/</span>
       <button data-lang-btn="en">EN</button>
     </div>
+    <button class="ro-nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </header>
 
   <!-- WORKS GRID HEAD -->
@@ -83,10 +86,11 @@
       </div>
     </a>
 
-    <a class="ro-tile ro-tile--empty" href="projets/andro-gyne.html" aria-label="Andro-Gyne">
+    <a class="ro-tile" href="projets/andro-gyne.html" aria-label="Andro-Gyne">
+      <img class="ro-tile-img" src="medias/andro-hero.jpg" alt="" loading="lazy">
       <div class="ro-tile-num">IV / 04</div>
       <div class="ro-tile-kind"><span lang="fr">Théâtre · 2025 —</span><span lang="en">Theatre · 2025 —</span></div>
-      <div class="ro-tile-center">
+      <div class="ro-tile-foot">
         <h2 class="ro-tile-title">ANDRO-GYNE</h2>
         <div class="ro-tile-year"><span lang="fr">2025 — en cours</span><span lang="en">2025 — in progress</span></div>
       </div>
@@ -99,8 +103,22 @@
     <span>© POLYMORPHE · MMXXVI</span>
     <a href="mailto:fredericcst@gmail.com">FREDERICCST@GMAIL.COM</a>
     <a href="https://instagram.com/poly_morphe" target="_blank" rel="noopener">@POLY_MORPHE</a>
-    <span>PARIS · BERLIN · SEINE-SAINT-DENIS</span>
+    <span>PARIS · SEINE-SAINT-DENIS</span>
   </footer>
+
+
+  <!-- MOBILE NAV -->
+  <nav class="ro-nav-mobile">
+    <a href="index.html#works"class="is-active"><span lang="fr">Œuvres</span><span lang="en">Works</span></a>
+    <a href="bio.html"><span lang="fr">Bio</span><span lang="en">Bio</span></a>
+    <a href="cv.html">CV</a>
+    <a href="contact.html">Contact</a>
+    <div class="ro-nav-mobile-lang">
+      <button data-lang-btn="fr">FR</button>
+      <span>/</span>
+      <button data-lang-btn="en">EN</button>
+    </div>
+  </nav>
 
   <script src="js/site.js"></script>
 </body>
