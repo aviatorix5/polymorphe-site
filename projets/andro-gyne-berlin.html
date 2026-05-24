@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ANDRO-GYNE — Polymorphe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,200;0,300;0,400;0,500;0,700;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       ANDRO-GYNE — Edition B (Berlin editorial / brutalist mono)
+       Self-contained stylesheet — does NOT load ../css/styles.css.
+       ============================================================ */
+
+    /* RESET */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+
+    /* TOKENS */
+    :root {
+      --ink:       #0a0a0a;
+      --surface:   #141414;
+      --rule:      #232323;
+      --rule-soft: #1c1c1c;
+      --bone:      #e9e6df;
+      --bone-soft: #b4b1aa;
+      --bone-mute: #6e6b65;
+      --bone-faint:#42413e;
+      --invert-bg: #e9e6df;
+      --invert-fg: #0a0a0a;
+
+      --pad-x: clamp(20px, 4vw, 64px);
+      --gutter: clamp(12px, 1.6vw, 24px);
+
+      --font: 'Hanken Grotesk', 'Helvetica Neue', 'Arial', sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+      --t-micro: 10.5px;
+      --t-label: 11px;
+      --t-body:  15px;
+    }
+
+    /* BASE */
+    html { background: var(--ink); }
+    body {
+      background: var(--ink);
+      color: var(--bone);
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: var(--t-body);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    /* LANG TOGGLE */
+    html:not(.lang-en) [lang="en"] { display: none !important; }
+    html.lang-en [lang="fr"]      { display: none !important; }
+
+    /* NAV — sticky, ultra-minimal */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 20px var(--pad-x);
+      background: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--font);
+      font-size: var(--t-label);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bone-soft);
+    }
+    .nav-brand {
+      color: var(--bone);
+      letter-spacing: 0.18em;
+    }
+    .nav-middle {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+    }
+    .nav-middle a {
+      color: var(--bone-mute);
+      transition: color .15s ease;
+    }
+    .nav-middle a:hover, .nav-middle a.is-active { color: var(--bone); }
+    .nav-right {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      align-items: center;
+    }
+    .nav-lang button { color: var(--bone-mute); letter-spacing: 0.16em; }
+    .nav-lang button[aria-current="true"] { color: var(--bone); }
+    .nav-lang .sep { color: var(--bone-faint); margin: 0 4px; }
+    @media (max-width: 760px) {
+      .nav { grid-template-columns: 1fr auto; gap: 16px; padding: 14px var(--pad-x); }
+      .nav-middle { display: none; }
+    }
+
+    /* ============================================================
+       HERO — full-bleed image with title slab inside
+       ============================================================ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 640px;
+      overflow: hidden;
+      background: #000;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center 25%;
+      filter: grayscale(0.15) contrast(1.05);
+    }
+    .hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(10,10,10,0.55) 0%,
+        rgba(10,10,10,0.0) 28%,
+        rgba(10,10,10,0.0) 60%,
+        rgba(10,10,10,0.85) 100%);
+    }
+    .hero-meta-tl, .hero-meta-tr, .hero-meta-bl, .hero-meta-br {
+      position: absolute;
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-soft);
+      z-index: 2;
+    }
+    .hero-meta-tl { top: 24px; left: var(--pad-x); }
+    .hero-meta-tr { top: 24px; right: var(--pad-x); text-align: right; }
+    .hero-meta-bl { bottom: 28px; left: var(--pad-x); }
+    .hero-meta-br {
+      bottom: 28px; right: var(--pad-x);
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-size: 11px;
+      color: var(--bone-soft);
+    }
+    .hero-title-wrap {
+      position: absolute;
+      left: var(--pad-x);
+      right: var(--pad-x);
+      bottom: 14vh;
+      z-index: 2;
+    }
+    .hero-title {
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: clamp(56px, 14vw, 220px);
+      line-height: 0.86;
+      letter-spacing: -0.04em;
+      margin: 0;
+      color: var(--bone);
+      text-transform: uppercase;
+    }
+    .hero-title .slash {
+      font-weight: 200;
+      color: var(--bone-soft);
+      margin: 0 -0.04em;
+    }
+    .hero-title .gyne {
+      font-weight: 200;
+      font-style: italic;
+      letter-spacing: -0.05em;
+    }
+    .hero-tag {
+      margin-top: 20px;
+      font-family: var(--font);
+      font-size: var(--t-label);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+    }
+    @media (max-width: 760px) {
+      .hero { height: 80svh; min-height: 520px; }
+      .hero-title-wrap { bottom: 10vh; }
+    }
+
+    /* ============================================================
+       SECTION CONTAINER
+       ============================================================ */
+    section { position: relative; }
+    .pad {
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
+    }
+    .rule-top { border-top: 1px solid var(--rule); }
+
+    /* INDEX strip — slim row of metadata */
+    .indexstrip {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 1fr auto;
+      gap: 32px;
+      padding: 18px var(--pad-x);
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+      align-items: baseline;
+    }
+    .indexstrip .v { color: var(--bone); }
+    @media (max-width: 760px) {
+      .indexstrip { grid-template-columns: 60px 1fr 1fr; }
+      .indexstrip > :nth-child(4), .indexstrip > :nth-child(5) { display: none; }
+    }
+
+    /* LEAD — opening editorial paragraph */
+    .lead-wrap {
+      padding: clamp(60px, 12vh, 160px) var(--pad-x) clamp(60px, 10vh, 120px);
+      display: grid;
+      grid-template-columns: 1fr 8fr 3fr;
+      gap: 40px;
+    }
+    .lead-wrap .lead-label {
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+      padding-top: 12px;
+    }
+    .lead {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(22px, 2.5vw, 34px);
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      color: var(--bone);
+      max-width: 22ch;
+    }
+    .lead em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--bone-soft);
+    }
+    .lead-aside {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--bone-mute);
+      line-height: 1.7;
+      padding-top: 14px;
+    }
+    @media (max-width: 900px) {
+      .lead-wrap { grid-template-columns: 1fr; gap: 24px; }
+      .lead { max-width: none; }
+    }
+
+    /* FULL-BLEED IMAGE */
+    .fb {
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      background: #000;
+    }
+    .fb img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(0.08) contrast(1.04);
+    }
+    .fb.tall img { aspect-ratio: 4/5; object-fit: cover; height: auto; width: 100%; }
+    .fb.cinema img { aspect-ratio: 21/9; object-fit: cover; height: 100%; width: 100%; }
+    .fb.cinema { aspect-ratio: 21/9; }
+    .fb-cap {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px var(--pad-x) 0;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      color: var(--bone-mute);
+    }
+    .fb-cap .num { color: var(--bone-faint); }
+
+    /* DIPTYCH / TRIPTYCH (flush, no inset) */
+    .diptych {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--rule);
+    }
+    .triptych {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--rule);
+    }
+    .diptych img, .triptych img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4/5;
+      filter: grayscale(0.08) contrast(1.04);
+    }
+    @media (max-width: 760px) {
+      .triptych { grid-template-columns: 1fr; }
+    }
+
+    /* TEXT BLOCK — narrow editorial column over wide negative space */
+    .txt-block {
+      padding: clamp(80px, 14vh, 180px) var(--pad-x);
+      display: grid;
+      grid-template-columns: 1fr 7fr 4fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .txt-block .eyebrow {
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+      padding-top: 6px;
+    }
+    .txt-block .body p {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.55;
+      color: var(--bone-soft);
+      margin: 0 0 1.3em;
+      max-width: 56ch;
+    }
+    .txt-block .body p em { font-style: italic; color: var(--bone); font-weight: 300; }
+    .txt-block .body p:first-child {
+      font-weight: 300;
+      font-size: clamp(18px, 1.4vw, 22px);
+      color: var(--bone);
+      line-height: 1.45;
+    }
+    .txt-block .pull {
+      font-family: var(--font);
+      font-weight: 200;
+      font-style: italic;
+      font-size: clamp(20px, 1.8vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--bone);
+      max-width: 22ch;
+      padding-top: 4px;
+    }
+    .txt-block .pull::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--bone-soft);
+      margin-bottom: 18px;
+    }
+    @media (max-width: 900px) {
+      .txt-block { grid-template-columns: 1fr; gap: 36px; padding-top: 80px; padding-bottom: 80px; }
+    }
+
+    /* INVERTED SECTION (bone background, ink text) — break in the rhythm */
+    .invert {
+      background: var(--invert-bg);
+      color: var(--invert-fg);
+    }
+    .invert .eyebrow,
+    .invert .lead-label,
+    .invert .lead-aside { color: #5a5852; }
+    .invert .lead { color: var(--invert-fg); }
+    .invert .lead em { color: #5a5852; }
+    .invert .body p { color: #2a2a28; }
+    .invert .body p:first-child { color: var(--invert-fg); }
+    .invert .pull { color: var(--invert-fg); }
+    .invert .pull::before { background: #2a2a28; }
+
+    /* CREDITS — tight columnar grid */
+    .credits-wrap {
+      padding: clamp(80px, 14vh, 160px) var(--pad-x) clamp(60px, 10vh, 120px);
+      border-top: 1px solid var(--rule);
+    }
+    .credits-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+    .credits-head h2 {
+      font-family: var(--font);
+      font-weight: 200;
+      font-size: clamp(40px, 5.5vw, 84px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin: 0;
+      color: var(--bone);
+      text-transform: uppercase;
+    }
+    .credits-head h2 em {
+      font-style: italic;
+      font-weight: 200;
+      color: var(--bone-soft);
+    }
+    .credits-head .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--bone-mute);
+    }
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .credits-grid .cred {
+      background: var(--ink);
+      padding: 22px 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .credits-grid .cred .lbl {
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+    }
+    .credits-grid .cred .val {
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--bone);
+    }
+    .credits-grid .cred .val em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--bone-soft);
+    }
+    .credits-grid .cred.span2 { grid-column: span 2; }
+    @media (max-width: 900px) {
+      .credits-grid { grid-template-columns: repeat(2, 1fr); }
+      .credits-grid .cred.span2 { grid-column: span 2; }
+    }
+    @media (max-width: 540px) {
+      .credits-grid { grid-template-columns: 1fr; }
+      .credits-grid .cred.span2 { grid-column: span 1; }
+    }
+
+    /* NEXT — big typographic link */
+    .next-wrap {
+      border-top: 1px solid var(--rule);
+      padding: clamp(48px, 8vh, 96px) var(--pad-x);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 40px;
+      align-items: center;
+      transition: background .25s ease, color .25s ease;
+    }
+    .next-wrap:hover { background: var(--bone); color: var(--ink); }
+    .next-wrap:hover .next-num,
+    .next-wrap:hover .next-meta { color: #3a3a36; }
+    .next-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--bone-mute);
+      text-transform: uppercase;
+    }
+    .next-title {
+      font-family: var(--font);
+      font-weight: 200;
+      font-size: clamp(40px, 7vw, 110px);
+      line-height: 0.9;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      color: inherit;
+    }
+    .next-title em {
+      font-style: italic;
+      font-weight: 200;
+    }
+    .next-meta {
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+      text-align: right;
+    }
+    .next-arrow {
+      font-family: var(--font);
+      font-weight: 200;
+      font-size: 40px;
+      line-height: 1;
+      transition: transform .25s ease;
+    }
+    .next-wrap:hover .next-arrow { transform: translateX(12px); }
+    @media (max-width: 760px) {
+      .next-wrap { grid-template-columns: auto 1fr; gap: 16px; }
+      .next-meta { display: none; }
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 32px var(--pad-x) 40px;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      font-family: var(--font);
+      font-size: var(--t-micro);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+    }
+    .footer a { transition: color .15s ease; }
+    .footer a:hover { color: var(--bone); }
+    .footer .right { text-align: right; }
+    @media (max-width: 760px) {
+      .footer { grid-template-columns: 1fr 1fr; }
+      .footer .right { text-align: left; }
+    }
+
+    /* SPACER */
+    .spacer-sm { height: 2px; background: var(--rule); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="../index.html" class="nav-brand">F. Costes-Hadjami / Polymorphe</a>
+    <nav class="nav-middle">
+      <a href="../index.html"><span lang="fr">Index</span><span lang="en">Index</span></a>
+      <a href="../bio.html"><span lang="fr">Bio</span><span lang="en">Bio</span></a>
+      <a href="../cv.html">CV</a>
+      <a href="../index.html#oeuvres" class="is-active"><span lang="fr">Œuvres</span><span lang="en">Works</span></a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <div class="nav-right nav-lang">
+      <button data-lang-btn="fr">FR</button>
+      <span class="sep">/</span>
+      <button data-lang-btn="en">EN</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img" style="background-image:url(../medias/andro-hero.jpg)"></div>
+    <div class="hero-meta-tl">
+      <span lang="fr">Œuvre IV — En création</span>
+      <span lang="en">Work IV — In progress</span>
+    </div>
+    <div class="hero-meta-tr">Cie La Peste · 2025–</div>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title">Andro<span class="slash">/</span><span class="gyne">Gyne</span></h1>
+      <div class="hero-tag">
+        <span lang="fr">Une farce queer entre mythe et dystopie</span>
+        <span lang="en">A queer farce between myth and dystopia</span>
+      </div>
+    </div>
+    <div class="hero-meta-bl">
+      <span lang="fr">↓ Défiler</span>
+      <span lang="en">↓ Scroll</span>
+    </div>
+    <div class="hero-meta-br">FCH—04 · 2025</div>
+  </section>
+
+  <!-- INDEX STRIP -->
+  <div class="indexstrip">
+    <div>IV / 04</div>
+    <div><span lang="fr">Pièce / Théâtre</span><span lang="en">Play / Theatre</span></div>
+    <div>50′ — <span class="v"><span lang="fr">en cours</span><span lang="en">in progress</span></span></div>
+    <div>Cie La Peste</div>
+    <div>2025—</div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="lead-wrap">
+    <div class="lead-label">§ 01</div>
+    <p class="lead" lang="fr">
+      Andro et Gyne sont les fragments d'un corps autrefois uni, séparés par <em>le châtiment de Zeus</em> — propulsé·es dans un monde-immeuble dystopique qui ne cesse de les façonner, les classer, les corriger.
+    </p>
+    <p class="lead" lang="en">
+      Andro and Gyne are fragments of a body once whole, sundered by <em>Zeus's punishment</em> — hurled into a dystopian building-world that never stops shaping, classifying, correcting them.
+    </p>
+    <div class="lead-aside">
+      <div>— Texte coll. /</div>
+      <div>&nbsp;&nbsp;Frédéric C-H.</div>
+      <div>&nbsp;&nbsp;Léonie Chouteau</div>
+      <br>
+      <div>— Photographies /</div>
+      <div>&nbsp;&nbsp;Joost Van Der Ree</div>
+    </div>
+  </div>
+
+  <!-- FULL BLEED 01 -->
+  <section class="fb">
+    <img src="../medias/andro-01.jpg" alt="ANDRO-GYNE — duo en miroir" loading="lazy">
+  </section>
+  <div class="fb-cap">
+    <span><span lang="fr">Pl. 01 — Duo en miroir</span><span lang="en">Pl. 01 — Mirror duet</span></span>
+    <span class="num">01 / 05</span>
+  </div>
+
+  <!-- TEXT BLOCK 1 -->
+  <section class="txt-block">
+    <div class="eyebrow">§ 02 — <span lang="fr">Le monde-immeuble</span><span lang="en">The building-world</span></div>
+    <div class="body">
+      <p lang="fr">
+        Cité verticale où les dominants habitent les hauteurs et les précaires les sous-sols. Sur leur chemin : trois secrétaires autoritaires qui tamponnent les identités au <em>bureau des déchirements</em>, un Grand Couturier sadique qui façonne les corps à coups de prothèses et d'injonctions genrées, un jeu télévisé qui transforme le désir en spectacle rentable.
+      </p>
+      <p lang="fr">
+        Chaque institution censée aider est une machine à exploiter le manque.
+      </p>
+      <p lang="en">
+        A vertical city where the dominant inhabit the heights and the precarious the basements. On their way: three authoritarian secretaries who stamp identities at the <em>Office of Tearings</em>, a sadistic Grand Couturier who shapes bodies with prosthetics and gendered injunctions, a televised game show that turns desire into a profitable spectacle.
+      </p>
+      <p lang="en">
+        Every institution meant to help is a machine for exploiting lack.
+      </p>
+    </div>
+    <div class="pull">
+      <span lang="fr">La farce comme arme. Le grotesque comme vérité.</span>
+      <span lang="en">Farce as weapon. The grotesque as truth.</span>
+    </div>
+  </section>
+
+  <!-- DIPTYCH -->
+  <section class="diptych">
+    <img src="../medias/andro-02.jpg" alt="ANDRO-GYNE — corset lumineux" loading="lazy">
+    <img src="../medias/andro-03.jpg" alt="ANDRO-GYNE — trio" loading="lazy">
+  </section>
+  <div class="fb-cap">
+    <span><span lang="fr">Pl. 02–03 — Corset / Trio</span><span lang="en">Pl. 02–03 — Corset / Trio</span></span>
+    <span class="num">02–03 / 05</span>
+  </div>
+
+  <!-- INVERTED TEXT BLOCK -->
+  <section class="txt-block invert">
+    <div class="eyebrow">§ 03 — <span lang="fr">Étage -42</span><span lang="en">Floor -42</span></div>
+    <div class="body">
+      <p lang="fr">
+        Gyne se perd dans le labyrinthe avant de tomber sur un <em>cabaret clandestin à l'étage -42</em>, où Lazare, enfant sauvage, pieds nus dans un monde de talons, lui souffle une autre façon d'exister.
+      </p>
+      <p lang="fr">
+        Andro participe à <em>Alter Ego</em> dans l'espoir de retrouver l'autre moitié. Quand ils et elles se retrouvent enfin, c'est pour se recoudre l'un·e à l'autre avec une aiguille volée au couturier — et mourir.
+      </p>
+      <p lang="en">
+        Gyne loses herself in the labyrinth before stumbling onto a <em>clandestine cabaret on floor -42</em>, where Lazare — a wild child, barefoot in a world of heels — whispers another way of existing.
+      </p>
+      <p lang="en">
+        Andro takes part in <em>Alter Ego</em> hoping to find the other half. When they finally find each other, it is to sew themselves back together with a needle stolen from the couturier — and die.
+      </p>
+    </div>
+    <div class="pull">
+      <span lang="fr">Ce qui fut moquerie devient puissance, ce qui fut stigmate devient matière.</span>
+      <span lang="en">What was mockery becomes power, what was stigma becomes material.</span>
+    </div>
+  </section>
+
+  <!-- FULL BLEED 02 -->
+  <section class="fb">
+    <img src="../medias/andro-04.jpg" alt="ANDRO-GYNE — au micro" loading="lazy">
+  </section>
+  <div class="fb-cap">
+    <span><span lang="fr">Pl. 04 — Au micro</span><span lang="en">Pl. 04 — At the mic</span></span>
+    <span class="num">04 / 05</span>
+  </div>
+
+  <!-- TEXT BLOCK 2 — Influences -->
+  <section class="txt-block">
+    <div class="eyebrow">§ 04 — <span lang="fr">Filiations</span><span lang="en">Lineages</span></div>
+    <div class="body">
+      <p lang="fr">
+        <em>Copi</em> nous a appris ça : ne jamais séparer le politique du burlesque, le tragique du ridicule. <em>Lazare</em> nous a donné la langue comme matière première — la poésie et la folie. Le <em>Munstrum</em> : le corps poussé jusqu'à la créature, la déformation comme outil dramaturgique. <em>Wajdi Mouawad</em> : le souffle épique, la question des origines, l'humour tenu dans le tragique sans que l'un détruise l'autre.
+      </p>
+      <p lang="en">
+        <em>Copi</em> taught us this: never to separate the political from the burlesque, the tragic from the ridiculous. <em>Lazare</em> gave us language as raw material — poetry and madness. <em>Munstrum</em>: the body pushed to the creature, deformation as dramaturgical tool. <em>Wajdi Mouawad</em>: the epic breath, the question of origins, humour held inside tragedy without one destroying the other.
+      </p>
+    </div>
+    <div class="pull">
+      <span lang="fr">Désir irréductible de liberté.</span>
+      <span lang="en">An irreducible desire for freedom.</span>
+    </div>
+  </section>
+
+  <!-- FULL BLEED 03 — last image, tall -->
+  <section class="fb">
+    <img src="../medias/andro-05.jpg" alt="ANDRO-GYNE — chant" loading="lazy">
+  </section>
+  <div class="fb-cap">
+    <span><span lang="fr">Pl. 05 — Chant</span><span lang="en">Pl. 05 — Song</span></span>
+    <span class="num">05 / 05</span>
+  </div>
+
+  <!-- CREDITS -->
+  <section class="credits-wrap">
+    <div class="credits-head">
+      <h2>
+        <span lang="fr">Distribution &amp; <em>Crédits</em></span>
+        <span lang="en">Cast &amp; <em>Credits</em></span>
+      </h2>
+      <div class="num">§ 05 / FCH—04</div>
+    </div>
+
+    <div class="credits-grid">
+      <div class="cred span2">
+        <div class="lbl"><span lang="fr">Mise en scène</span><span lang="en">Direction</span></div>
+        <div class="val">Frédéric <em>Costes-Hadjami</em></div>
+      </div>
+      <div class="cred span2">
+        <div class="lbl"><span lang="fr">Texte — écriture collective</span><span lang="en">Text — collective writing</span></div>
+        <div class="val">
+          <span lang="fr">Coordonnée par Frédéric Costes-Hadjami<br>&amp; Léonie <em>Chouteau</em></span>
+          <span lang="en">Coordinated by Frédéric Costes-Hadjami<br>&amp; Léonie <em>Chouteau</em></span>
+        </div>
+      </div>
+
+      <div class="cred span2">
+        <div class="lbl"><span lang="fr">Avec / Plateau</span><span lang="en">With / Stage</span></div>
+        <div class="val">
+          Marcelle <em>Alleaume</em><br>
+          Marie <em>Cannesson</em><br>
+          Clément <em>Istre</em><br>
+          Daphné <em>Papadopoulos</em><br>
+          Nicolas <em>Sacroug</em>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="lbl"><span lang="fr">Costumes</span><span lang="en">Costumes</span></div>
+        <div class="val">Daphné <em>Papadopoulos</em></div>
+      </div>
+      <div class="cred">
+        <div class="lbl"><span lang="fr">Lumières</span><span lang="en">Lighting</span></div>
+        <div class="val">Pierre <em>Prosper</em></div>
+      </div>
+
+      <div class="cred">
+        <div class="lbl"><span lang="fr">Composition musicale</span><span lang="en">Music</span></div>
+        <div class="val">Soraya <em>Chehb-laine</em><br>Aurore <em>Franco-Ricord</em></div>
+      </div>
+      <div class="cred">
+        <div class="lbl"><span lang="fr">Production</span><span lang="en">Production</span></div>
+        <div class="val">Xavier <em>Ouzounian</em><br>Cie <em>La Peste</em></div>
+      </div>
+      <div class="cred">
+        <div class="lbl"><span lang="fr">Durée</span><span lang="en">Duration</span></div>
+        <div class="val">
+          <span lang="fr">Étape : 50 min<br><em>Forme finale en cours</em></span>
+          <span lang="en">W.I.P.: 50 min<br><em>Final form in development</em></span>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="lbl"><span lang="fr">Photographies</span><span lang="en">Photographs</span></div>
+        <div class="val">Joost <em>Van Der Ree</em></div>
+      </div>
+
+      <div class="cred span2">
+        <div class="lbl"><span lang="fr">Soutiens / Résidences</span><span lang="en">Support / Residencies</span></div>
+        <div class="val">
+          <em>Théâtre Public de Montreuil</em><br>
+          <em>Centre Paris Anim' Point du Jour</em><br>
+          <em>Théâtre Louis Aragon</em><br>
+          <em>Beaux-Arts de Paris</em>
+        </div>
+      </div>
+      <div class="cred span2">
+        <div class="lbl"><span lang="fr">Tournée / Contact</span><span lang="en">Touring / Contact</span></div>
+        <div class="val">
+          <a href="mailto:fredericcst@gmail.com">fredericcst@gmail.com</a><br>
+          <span lang="fr">Disponible 2026–2027</span>
+          <span lang="en">Available 2026–2027</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <a href="renaissance.html" class="next-wrap">
+    <span class="next-num">→ Next / V</span>
+    <span class="next-title">Renais<em>sance</em></span>
+    <span class="next-meta">
+      <span lang="fr">Performance · 2023</span>
+      <span lang="en">Performance · 2023</span>
+    </span>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>© Polymorphe · MMXXVI</div>
+    <div><a href="mailto:fredericcst@gmail.com">fredericcst@gmail.com</a></div>
+    <div><a href="https://instagram.com/poly_morphe" target="_blank" rel="noopener">@poly_morphe</a></div>
+    <div class="right">Paris · Seine-Saint-Denis</div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+</body>
+</html>
