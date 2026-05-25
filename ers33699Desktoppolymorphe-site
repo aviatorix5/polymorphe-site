@@ -1,0 +1,118 @@
+[33mcommit 501421bbb2390525a03cb88a85a1cec35df19fbd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: aviatorix5 <aviatorix5@gmail.com>
+Date:   Mon May 25 00:09:33 2026 +0200
+
+    nouveau site + menu mobile
+
+ Directions.html                                    | 432 [32m+++++++++[m
+ design-canvas.jsx                                  | 966 [32m+++++++++++++++++++++[m
+ site/Polymorphe - Contact.html                     | 182 [32m++++[m
+ site/README.md                                     | 118 [32m+++[m
+ bio.html => site/bio.html                          |  21 [32m+[m[31m-[m
+ contact.html => site/contact.html                  |  21 [32m+[m[31m-[m
+ {css => site/css}/polymorphe.css                   | 283 [32m++++[m[31m--[m
+ site/css/styles.css                                | 631 [32m++++++++++++++[m
+ cv.html => site/cv.html                            |  23 [32m+[m[31m-[m
+ site/index-bodoni.html                             | 134 [32m+++[m
+ site/index-standalone-src.html                     | 121 [32m+++[m
+ index.html => site/index.html                      |  30 [32m+[m[31m-[m
+ {js => site/js}/site.js                            |   0
+ site/medias/README.md                              |  16 [32m+[m
+ site/medias/andro-01.jpg                           | Bin [31m0[m -> [32m2362423[m bytes
+ site/medias/andro-02.jpg                           | Bin [31m0[m -> [32m2186844[m bytes
+ site/medias/andro-03.jpg                           | Bin [31m0[m -> [32m3128977[m bytes
+ site/medias/andro-04.jpg                           | Bin [31m0[m -> [32m3679756[m bytes
+ site/medias/andro-05.jpg                           | Bin [31m0[m -> [32m3531635[m bytes
+ site/medias/andro-hero.jpg                         | Bin [31m0[m -> [32m3069227[m bytes
+ site/medias/contact-photo.jpg                      | Bin [31m0[m -> [32m65032[m bytes
+ site/medias/depression-01.jpg                      | Bin [31m0[m -> [32m295722[m bytes
+ site/medias/depression-02.jpg                      | Bin [31m0[m -> [32m1626108[m bytes
+ site/medias/depression-03.jpg                      | Bin [31m0[m -> [32m7034746[m bytes
+ site/medias/depression-04.jpg                      | Bin [31m0[m -> [32m1400693[m bytes
+ site/medias/depression-05.jpg                      | Bin [31m0[m -> [32m1555105[m bytes
+ site/medias/depression-06.jpg                      | Bin [31m0[m -> [32m900837[m bytes
+ site/medias/depression-07.jpg                      | Bin [31m0[m -> [32m945352[m bytes
+ site/medias/depression-hero.jpg                    | Bin [31m0[m -> [32m314093[m bytes
+ site/medias/hero.jpg                               | Bin [31m0[m -> [32m128326[m bytes
+ site/medias/home-bottom.jpg                        | Bin [31m0[m -> [32m128326[m bytes
+ site/medias/intro-loop.mp4                         | Bin [31m0[m -> [32m16189088[m bytes
+ site/medias/monogram-ink.png                       | Bin [31m0[m -> [32m105404[m bytes
+ site/medias/monogram-ivory.png                     | Bin [31m0[m -> [32m116741[m bytes
+ site/medias/portrait.avif                          | Bin [31m0[m -> [32m44661[m bytes
+ site/medias/portrait.jpg                           | Bin [31m0[m -> [32m9637705[m bytes
+ site/medias/renaissance-01.jpg                     | Bin [31m0[m -> [32m3153930[m bytes
+ site/medias/renaissance-02.jpg                     | Bin [31m0[m -> [32m2325126[m bytes
+ site/medias/renaissance-03.jpg                     | Bin [31m0[m -> [32m1791995[m bytes
+ site/medias/renaissance-04.jpg                     | Bin [31m0[m -> [32m10367581[m bytes
+ site/medias/renaissance-05.jpg                     | Bin [31m0[m -> [32m12599135[m bytes
+ site/medias/renaissance-06.jpg                     | Bin [31m0[m -> [32m9236192[m bytes
+ site/medias/renaissance-07.jpg                     | Bin [31m0[m -> [32m7783804[m bytes
+ site/medias/renaissance-hero.jpg                   | Bin [31m0[m -> [32m13608985[m bytes
+ site/medias/rituel-01.jpg                          | Bin [31m0[m -> [32m8184560[m bytes
+ site/medias/rituel-02.jpg                          | Bin [31m0[m -> [32m7641304[m bytes
+ site/medias/rituel-03.jpg                          | Bin [31m0[m -> [32m3399901[m bytes
+ site/medias/rituel-04.jpg                          | Bin [31m0[m -> [32m2416937[m bytes
+ site/medias/rituel-05.jpg                          | Bin [31m0[m -> [32m16082014[m bytes
+ site/medias/rituel-hero.jpg                        | Bin [31m0[m -> [32m6032835[m bytes
+ site/medias/rituel-tile.jpg                        | Bin [31m0[m -> [32m1891631[m bytes
+ site/medias/wordmark-polymorphe-dark.png           | Bin [31m0[m -> [32m83379[m bytes
+ site/medias/wordmark-polymorphe.png                | Bin [31m0[m -> [32m84297[m bytes
+ site/projets/andro-gyne-berlin.html                | 819 [32m+++++++++++++++++[m
+ {projets => site/projets}/andro-gyne.html          |  46 [32m+[m[31m-[m
+ .../projets}/depression-purgatory.html             |  24 [32m+[m[31m-[m
+ site/projets/renaissance-standalone-src.html       | 200 [32m+++++[m
+ {projets => site/projets}/renaissance.html         |  24 [32m+[m[31m-[m
+ {projets => site/projets}/rituel-pour-une-mue.html |  30 [32m+[m[31m-[m
+ uploads/000094220006 copy.jpg                      | Bin [31m0[m -> [32m2362423[m bytes
+ uploads/000094220008 copy.jpg                      | Bin [31m0[m -> [32m2186844[m bytes
+ uploads/000094220009 copy.jpg                      | Bin [31m0[m -> [32m3128977[m bytes
+ uploads/000094220014 copy.jpg                      | Bin [31m0[m -> [32m3679756[m bytes
+ uploads/000094220015 copy.jpg                      | Bin [31m0[m -> [32m3531635[m bytes
+ uploads/000094220033 copy.jpg                      | Bin [31m0[m -> [32m3069227[m bytes
+ ...4f0bb_50e3cee44f5d474584912eb79196a2d2~mv2.avif | Bin [31m0[m -> [32m44661[m bytes
+ ...-mode-Festival_La-vilette-Romain-Guede-1779.jpg | Bin [31m0[m -> [32m3153930[m bytes
+ ...020_01_18_Projet-Symbiose-Romain-Guede-5119.jpg | Bin [31m0[m -> [32m1555105[m bytes
+ ...020_01_18_Projet-Symbiose-Romain-Guede-5184.jpg | Bin [31m0[m -> [32m1626108[m bytes
+ uploads/565E1B98-FA90-4F8B-A19E-7006E47A7B13.jpg   | Bin [31m0[m -> [32m1400693[m bytes
+ ...251cran . 2022-11-12 \303\240 17.41_edited.jpg" | Bin [31m0[m -> [32m1483372[m bytes
+ .../ChatGPT Image May 24, 2026, 06_28_27 PM.png    | Bin [31m0[m -> [32m2078592[m bytes
+ .../ChatGPT Image May 24, 2026, 06_30_06 PM.png    | Bin [31m0[m -> [32m1062762[m bytes
+ .../ChatGPT Image May 24, 2026, 11_01_19 PM.png    | Bin [31m0[m -> [32m1891631[m bytes
+ .../ChatGPT Image May 24, 2026, 11_49_15 PM.png    | Bin [31m0[m -> [32m1054037[m bytes
+ .../ChatGPT Image May 24, 2026, 11_53_46 PM.png    | Bin [31m0[m -> [32m1108055[m bytes
+ uploads/Cie Titane - Brian Downie (11).jpg         | Bin [31m0[m -> [32m7641304[m bytes
+ uploads/Cie Titane - Brian Downie (2).png          | Bin [31m0[m -> [32m1283864[m bytes
+ uploads/Cie Titane - Brian Downie (21.jpg          | Bin [31m0[m -> [32m559996[m bytes
+ uploads/Cie Titane - Brian Downie (4).jpg          | Bin [31m0[m -> [32m8184560[m bytes
+ uploads/Cie Titane - Brian Downie (9).jpg          | Bin [31m0[m -> [32m6032835[m bytes
+ ...n Downie Compr\303\251ss\303\251e-e4b9c417.jpg" | Bin [31m0[m -> [32m2416937[m bytes
+ ...ne - Brian Downie Compr\303\251ss\303\251e.jpg" | Bin [31m0[m -> [32m2416937[m bytes
+ ...e - Brian Downie compress\303\251-d1a7386a.jpg" | Bin [31m0[m -> [32m3399901[m bytes
+ ...Cie Titane - Brian Downie compress\303\251.jpg" | Bin [31m0[m -> [32m3399901[m bytes
+ uploads/Cie Titane - Brian Downie-a57ed041.jpg     | Bin [31m0[m -> [32m16082014[m bytes
+ uploads/Cie Titane - Brian Downie.jpg              | Bin [31m0[m -> [32m16082014[m bytes
+ uploads/Depression purgatory short version.mp4     | Bin [31m0[m -> [32m16189088[m bytes
+ uploads/Fotor_15775645062026.jpg                   | Bin [31m0[m -> [32m2325126[m bytes
+ uploads/Fotor_157763396252481.jpg                  | Bin [31m0[m -> [32m1791995[m bytes
+ "uploads/Fre\314\201de\314\201ric 007-1881.jpg"    | Bin [31m0[m -> [32m9637705[m bytes
+ uploads/IMG_0037.jpg                               | Bin [31m0[m -> [32m945352[m bytes
+ uploads/IMG_0046.jpg                               | Bin [31m0[m -> [32m295722[m bytes
+ uploads/IMG_0053.jpg                               | Bin [31m0[m -> [32m314093[m bytes
+ uploads/IMG_0059.jpg                               | Bin [31m0[m -> [32m900837[m bytes
+ uploads/IMG_0303.png                               | Bin [31m0[m -> [32m7034746[m bytes
+ uploads/IMG_5574-b01a77b4.jpg                      | Bin [31m0[m -> [32m128326[m bytes
+ uploads/IMG_5574.jpg                               | Bin [31m0[m -> [32m114189[m bytes
+ uploads/IMG_9193-f6a75f78.jpg                      | Bin [31m0[m -> [32m1395846[m bytes
+ uploads/IMG_9193.jpg                               | Bin [31m0[m -> [32m1923918[m bytes
+ uploads/frederic-portrait.jpg.jpg                  | Bin [31m0[m -> [32m9637705[m bytes
+ uploads/monogram-new.png                           | Bin [31m0[m -> [32m1108055[m bytes
+ uploads/polymorphe-logo-source.png                 | Bin [31m0[m -> [32m2078592[m bytes
+ uploads/polymorphe-mono-source.png                 | Bin [31m0[m -> [32m1062762[m bytes
+ uploads/polymorphe-wordmark-new.png                | Bin [31m0[m -> [32m1054037[m bytes
+ uploads/polymorphe37.jpg                           | Bin [31m0[m -> [32m10367581[m bytes
+ uploads/polymorphe43.jpg                           | Bin [31m0[m -> [32m13608985[m bytes
+ uploads/polymorphe53.jpg                           | Bin [31m0[m -> [32m12599135[m bytes
+ uploads/polymorphe55.jpg                           | Bin [31m0[m -> [32m9236192[m bytes
+ uploads/polymorphe58.jpg                           | Bin [31m0[m -> [32m7783804[m bytes
+ uploads/unnamed (2).jpg                            | Bin [31m0[m -> [32m65032[m bytes
+ 111 files changed, 3890 insertions(+), 231 deletions(-)
