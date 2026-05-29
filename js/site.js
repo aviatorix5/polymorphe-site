@@ -92,3 +92,20 @@
     if (e.key === 'Escape') close();
   });
 })();
+
+/* ============================================================
+   HAMBURGER MENU
+   ============================================================ */
+(function () {
+  var btn = document.querySelector('.ro-nav-hamburger');
+  var menu = document.querySelector('.ro-nav-mobile');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    menu.classList.toggle('is-open');
+  });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('is-open');
+    });
+  });
+})();
